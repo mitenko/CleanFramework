@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    dataBinding {
+        enabled = true
+    }
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.mitenkodavid.cleanframework"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "${version_name}"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Google play services
+    compile "com.google.android.gms:play-services-maps:${google_play_services_version}"
+
+    // Design / UI
+    compile "com.android.support:design:${android_support_lib_version}"
+    compile "com.android.support:support-v13:${android_support_lib_version}"
+    compile "com.android.support:support-annotations:${android_support_lib_version}"
+
+    // Debugging
+    compile "com.facebook.stetho:stetho:${stetho_version}"
+    compile "com.facebook.stetho:stetho-okhttp3:${stetho_version}"
+    compile "com.jakewharton.timber:timber:${timber_version}"
+
+    // Network
+    compile "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    compile "com.squareup.okhttp3:logging-interceptor:${okhttp_version}"
+    compile "com.squareup.retrofit2:converter-scalars:${retrofit_version}"
+
+    // Injection
+    compile "com.google.dagger:dagger:${dagger_version}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${dagger_version}"
+    compile "com.hannesdorfmann.fragmentargs:annotation:${fragment_args_version}"
+    annotationProcessor "com.hannesdorfmann.fragmentargs:processor:${fragment_args_version}"
+
+    // RXKotlin
+    compile "io.reactivex.rxjava2:rxkotlin:${rxkotlin_version}"
+    compile "io.reactivex.rxjava2:rxjava:${rxjava_version}"
+    compile "com.jakewharton.rxbinding2:rxbinding-kotlin:${rxbinding_version}"
+
+    // Compatibility
+    compile "com.android.support:multidex:${google_multi_dex}"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin_version}"
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
