@@ -1,7 +1,9 @@
 package com.example.mitenkodavid.cleanframework.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +29,17 @@ abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: Root
     : Fragment(), RootFragmentView {
     protected lateinit var presenter: P
     protected abstract val fragmentLayoutId: Int
+    companion object {
+        var fragmentTag = "root_fragment"
+    }
 
     // region Fragment Lifecycle
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        activity?.supportFragmentManager
+                ?.registerFragmentLifecycleCallbacks(presenter, false)
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreate(savedInstanceState)
@@ -36,6 +47,12 @@ abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: Root
                 inflater.inflate(R.layout.fragment_root, container, false) as ViewGroup
         inflater.inflate(fragmentLayoutId, rootContainer, true)
         return rootContainer
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.supportFragmentManager
+                ?.unregisterFragmentLifecycleCallbacks(presenter)
     }
     // endregion
 

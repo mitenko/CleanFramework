@@ -1,5 +1,8 @@
 package com.example.mitenkodavid.cleanframework.presenter
 
+import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import com.example.mitenkodavid.cleanframework.R
 import com.example.mitenkodavid.cleanframework.model.ClickEvent
 import com.example.mitenkodavid.cleanframework.model.MVPObservable
@@ -14,8 +17,8 @@ class PresenterA(state: StateA, view: FragmentAView)
     // region Rendering functions
     override fun render(view: FragmentAView, newState: StateA, oldState: StateA) {
         super.render(view, newState, oldState)
-        if (newState.loaded != oldState.loaded) {
-            view.setProgressBarVisible(!newState.loaded)
+        if (newState.loading != oldState.loading) {
+            view.setProgressBarVisible(!newState.loading)
         }
     }
     // endregion
@@ -24,17 +27,18 @@ class PresenterA(state: StateA, view: FragmentAView)
     override fun onNext(observable: MVPObservable) {
         /**
          * The FAB button has been clicked
-         * Simulate sucessful REST response
+         * Simulate successful REST response
          */
         if (observable is ClickEvent && observable.viewId == R.id.fab) {
-            state.update(state.copy(loaded = true))
+            val curLoading = state.loading
+            updateState(state.copy(loading = !curLoading))
         }
 
         /**
          * Something has been entered into the Input Text
          */
         if (observable is TextEvent && observable.viewId == R.id.inputText) {
-            state.update(state.copy(inputString = observable.text))
+            updateState(state.copy(inputString = observable.text))
         }
     }
 
@@ -42,4 +46,10 @@ class PresenterA(state: StateA, view: FragmentAView)
         Timber.e("onError: " + e.toString())
     }
     // endregion
+
+
+    override fun onFragmentSaveInstanceState(fragMan: FragmentManager, frag: Fragment, outState: Bundle) {
+        state = state.copy(loading = false, inputString = "SAVED")
+        super.onFragmentSaveInstanceState(fragMan, frag, outState)
+    }
 }
