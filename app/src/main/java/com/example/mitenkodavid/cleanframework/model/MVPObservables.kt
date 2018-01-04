@@ -1,9 +1,5 @@
 package com.example.mitenkodavid.cleanframework.model
 
-/**
- * Created by Real Estate Webmasters on 12/29/2017.
- * Copyright © Real Estate Webmasters. All rights reserved.
- */
 
 /**
  * The root observable

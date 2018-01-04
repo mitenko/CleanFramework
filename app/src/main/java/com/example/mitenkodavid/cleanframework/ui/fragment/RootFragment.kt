@@ -17,17 +17,14 @@ import kotlinx.android.synthetic.main.fragment_root.*
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by Real Estate Webmasters on 12/27/2017.
- * Copyright © Real Estate Webmasters. All rights reserved.
- */
-/**
  * The Root Fragment View Interface
  */
 interface RootFragmentView {
-    fun progressBarVisible(visible:Boolean)
+    fun setProgressBarVisible(visible:Boolean)
 }
 
-abstract class RootFragment<S,P>: Fragment(), RootFragmentView {
+abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: RootFragmentView>
+    : Fragment(), RootFragmentView {
     protected lateinit var presenter: P
     protected abstract val fragmentLayoutId: Int
 
@@ -46,7 +43,7 @@ abstract class RootFragment<S,P>: Fragment(), RootFragmentView {
     /**
      * Sets the visibility of the progress bar
      */
-    override fun progressBarVisible(visible:Boolean) {
+    override fun setProgressBarVisible(visible:Boolean) {
         progressBar.visibility =
                 if (visible) View.VISIBLE else View.INVISIBLE
     }
