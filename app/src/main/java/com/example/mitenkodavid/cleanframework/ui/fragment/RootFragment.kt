@@ -3,7 +3,6 @@ package com.example.mitenkodavid.cleanframework.ui.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,7 @@ abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: Root
     protected lateinit var presenter: P
     protected abstract val fragmentLayoutId: Int
     companion object {
-        var fragmentTag = "root_fragment"
+        var fragmentTag = "root"
     }
 
     // region Fragment Lifecycle

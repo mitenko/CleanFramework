@@ -1,8 +1,5 @@
 package com.example.mitenkodavid.cleanframework.presenter
 
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import com.example.mitenkodavid.cleanframework.R
 import com.example.mitenkodavid.cleanframework.model.ClickEvent
 import com.example.mitenkodavid.cleanframework.model.MVPObservable
@@ -30,8 +27,12 @@ class PresenterA(state: StateA, view: FragmentAView)
          * Simulate successful REST response
          */
         if (observable is ClickEvent && observable.viewId == R.id.fab) {
-            val curLoading = state.loading
-            updateState(state.copy(loading = !curLoading))
+            if (!state.inputString.isEmpty()) {
+                /**
+                 * put in retrofit request here
+                 */
+                updateState(state.copy(loading = true))
+            }
         }
 
         /**
@@ -46,10 +47,4 @@ class PresenterA(state: StateA, view: FragmentAView)
         Timber.e("onError: " + e.toString())
     }
     // endregion
-
-
-    override fun onFragmentSaveInstanceState(fragMan: FragmentManager, frag: Fragment, outState: Bundle) {
-        state = state.copy(loading = false, inputString = "SAVED")
-        super.onFragmentSaveInstanceState(fragMan, frag, outState)
-    }
 }

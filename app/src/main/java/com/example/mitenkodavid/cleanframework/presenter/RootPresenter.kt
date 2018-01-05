@@ -1,7 +1,10 @@
 package com.example.mitenkodavid.cleanframework.presenter
 
+import android.os.Bundle
 import android.support.annotation.CallSuper
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.view.View
 import com.example.mitenkodavid.cleanframework.model.MVPObservable
 import com.example.mitenkodavid.cleanframework.state.RootFragmentState
 import com.example.mitenkodavid.cleanframework.ui.fragment.RootFragmentView
@@ -9,9 +12,6 @@ import io.reactivex.Observer
 import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.View
 
 
 /**

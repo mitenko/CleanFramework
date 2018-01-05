@@ -21,14 +21,14 @@ class FragmentA: RootFragment<PresenterA, StateA, FragmentAView>(), FragmentAVie
      * https://www.raywenderlich.com/169885/android-fragments-tutorial-introduction-2
      */
     companion object {
-        var fragmentTag =
+        const val fragmentTag = "A"
         fun newInstance(): FragmentA {
             return FragmentA()
         }
     }
 
     /**
-     *
+     * Once the view has been created, subscribe any buttons and textviews
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
