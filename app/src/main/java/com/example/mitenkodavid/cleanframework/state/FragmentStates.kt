@@ -6,10 +6,6 @@ import com.example.mitenkodavid.cleanframework.ui.fragment.fragmentA.FragmentA
 import kotlinx.android.parcel.Parcelize
 
 /**
- * Created by Real Estate Webmasters on 1/2/2018.
- * Copyright © Real Estate Webmasters. All rights reserved.
- */
-/**
  * Contains the core state variables
  * Accessible at the RootPresenter level
  */

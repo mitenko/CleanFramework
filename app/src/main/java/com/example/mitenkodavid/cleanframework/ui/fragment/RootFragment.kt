@@ -33,12 +33,18 @@ abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: Root
     }
 
     // region Fragment Lifecycle
+    /**
+     * Add the presenter as a Lifecycle listener ASAP
+     */
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         activity?.supportFragmentManager
                 ?.registerFragmentLifecycleCallbacks(presenter, false)
     }
 
+    /**
+     * Inflate the container xml (which contains a progress bar and an error toast)
+     */
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreate(savedInstanceState)
@@ -48,6 +54,9 @@ abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: Root
         return rootContainer
     }
 
+    /**
+     * Unsubscribe the presenter when we're done
+     */
     override fun onDestroy() {
         super.onDestroy()
         activity?.supportFragmentManager
@@ -68,6 +77,7 @@ abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: Root
     // region RxView functions
     /**
      * Subscribes the button to the presenter
+     * map the click to a ClickEvent
      */
     protected fun subscribeButton(button: View) {
         RxView.clicks(button)
@@ -77,6 +87,7 @@ abstract class RootFragment<P: RootPresenter<S,V>, S: RootFragmentState, V: Root
 
     /**
      * Subscribes the text view to the presenter
+     * maps the text a TextEvent
      */
     protected fun subscribeTextView(textView: TextView) {
         val debounceTime =

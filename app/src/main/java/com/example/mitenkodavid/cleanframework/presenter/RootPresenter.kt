@@ -13,11 +13,6 @@ import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
 
-
-/**
- * Created by Real Estate Webmasters on 12/28/2017.
- * Copyright © Real Estate Webmasters. All rights reserved.
- */
 abstract class RootPresenter<S : RootFragmentState, V: RootFragmentView>
     (var state: S, var view: V) : Observer<MVPObservable>, FragmentManager.FragmentLifecycleCallbacks() {
     // region Rendering functions
