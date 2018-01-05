@@ -5,7 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface Services {
-    @GET
-    fun search(@Query("limit") limit: Int?, @Query("order") order: String, @Query("sort") sort: String, @Query("filter") filter: String, @Query("include") include: String
-    ): Observable
+    @GET("?action=query&list=search&utf8&format=json")
+    fun search(@Query("srsearch") searchParam: String): Observable<Void>
 }

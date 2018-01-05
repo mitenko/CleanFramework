@@ -52,7 +52,7 @@ dependencies {
 
     // Injection
     implementation "com.google.dagger:dagger:${dagger_version}"
-    annotationProcessor "com.google.dagger:dagger-implementationr:${dagger_version}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${dagger_version}"
     implementation "com.hannesdorfmann.fragmentargs:annotation:${fragment_args_version}"
     annotationProcessor "com.hannesdorfmann.fragmentargs:processor:${fragment_args_version}"
 
