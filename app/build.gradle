@@ -1,8 +1,9 @@
+
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 androidExtensions {
     experimental = true
 }
@@ -52,9 +53,9 @@ dependencies {
 
     // Injection
     implementation "com.google.dagger:dagger:${dagger_version}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
     implementation "com.hannesdorfmann.fragmentargs:annotation:${fragment_args_version}"
-    annotationProcessor "com.hannesdorfmann.fragmentargs:processor:${fragment_args_version}"
+    kapt "com.hannesdorfmann.fragmentargs:processor:${fragment_args_version}"
 
     // RXKotlin
     implementation "io.reactivex.rxjava2:rxkotlin:${rxkotlin_version}"

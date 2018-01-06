@@ -2,6 +2,7 @@ package com.example.mitenkodavid.cleanframework.ui.fragment.fragmentA
 
 import android.os.Bundle
 import android.view.View
+import com.example.mitenkodavid.cleanframework.MainApplication
 import com.example.mitenkodavid.cleanframework.R
 import com.example.mitenkodavid.cleanframework.presenter.PresenterA
 import com.example.mitenkodavid.cleanframework.state.StateA

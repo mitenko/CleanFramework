@@ -1,16 +1,24 @@
 package com.example.mitenkodavid.cleanframework.presenter
 
+import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import com.example.mitenkodavid.cleanframework.MainApplication
 import com.example.mitenkodavid.cleanframework.R
 import com.example.mitenkodavid.cleanframework.model.ClickEvent
 import com.example.mitenkodavid.cleanframework.model.MVPObservable
 import com.example.mitenkodavid.cleanframework.model.TextEvent
+import com.example.mitenkodavid.cleanframework.network.ApiService
 import com.example.mitenkodavid.cleanframework.state.StateA
 import com.example.mitenkodavid.cleanframework.ui.fragment.fragmentA.FragmentAView
 import timber.log.Timber
+import javax.inject.Inject
 
 
 class PresenterA(state: StateA, view: FragmentAView)
     : RootPresenter<StateA, FragmentAView>(state, view) {
+    @Inject lateinit var apiService: ApiService
+
     // region Rendering functions
     override fun render(view: FragmentAView, newState: StateA, oldState: StateA) {
         super.render(view, newState, oldState)
@@ -45,6 +53,14 @@ class PresenterA(state: StateA, view: FragmentAView)
 
     override fun onError(e: Throwable) {
         Timber.e("onError: " + e.toString())
+    }
+    // endregion
+
+
+    // region FragmentLifecycleCallbacks
+    override fun onFragmentActivityCreated(fragMan: FragmentManager, frag: Fragment, savedInstanceState: Bundle?) {
+        (frag.activity?.application as MainApplication).appComponent.inject(this)
+        super.onFragmentActivityCreated(fragMan, frag, savedInstanceState)
     }
     // endregion
 }

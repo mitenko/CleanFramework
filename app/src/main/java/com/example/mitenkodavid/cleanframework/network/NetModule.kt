@@ -1,6 +1,7 @@
 package com.example.mitenkodavid.cleanframework.network
 
 import android.app.Application
+import com.example.mitenkodavid.cleanframework.MainApplication
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import dagger.Module
@@ -24,7 +25,7 @@ class NetModule {
         /**
          * The base URL for Retrofit
          */
-        val BASE_URL = "https://www.wikipedia.org/w/api.php"
+        val BASE_URL = "https://www.wikipedia.org/w/"
 
         /**
          * Server specified Keep-Alive specs
@@ -39,10 +40,10 @@ class NetModule {
      */
     @Provides
     @Singleton
-    internal fun providesOkHttpCache(application: Application): Cache {
+    internal fun providesOkHttpCache(app: Application): Cache {
         // @TODO Use cache in interceptor
         val cacheSize = 10 * 1024 * 1024 // 10 MiB
-        return Cache(application.cacheDir, cacheSize.toLong())
+        return Cache(app.cacheDir, cacheSize.toLong())
     }
 
     @Provides
